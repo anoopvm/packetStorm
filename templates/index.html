@@ -34,75 +34,73 @@
         </div>
  
 
- 
+ <form action="generate_packets" method="post">
         <div class="row marketing">
             <div class="col-lg-6">
-                <h4>ICMP</h4>
+                <h4><input type="radio" name="proto-number" value="1" checked>ICMP</input></h4>
                 <p>Generate ICMP packet.</p>
  
-                <h4>IGMP</h4>
+                <h4><input type="radio" name="proto-number" value="2">IGMP</input></h4>
                 <p>Generate IGMP packet.</p>
  
             </div>
  
             <div class="col-lg-6">
-                <h4>UDP</h4>
+                <h4><input type="radio" name="proto-number" value="17">UDP</input></h4>
                 <p>Generate UDP packet.</p>
  
-                <h4>TCP</h4>
+                <h4><input type="radio" name="proto-number" value="6">TCP</input></h4>
                 <p>Generate TCP packet.</p>
             </div>
         </div>
-             <div class="row row-centered">
+            <div class="row row-centered">
                 <button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target="#myModal">
-                   <span>Generate Packet</span>
+                   <span>Generate Packet.</span>
                 </button>
             </div>
 
       <!-- Packet Details Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-
       <!-- Modal content-->
-  <form action="generate_packets" method="post">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Packet Details</h4>
-        </div>
-        <div class="modal-body">
-      <div class="form-group">
-        <label for="src-ip">Source IP Address:</label>
-        <input type="text" class="form-control" data-fv-field="ip" name="src-ip" placeholder="a.b.c.d">
-      </div>
-      <div class="form-group">
-        <label for="dst-ip">Destination IP Address:</label>
-        <input type="text" class="form-control" data-fv-field="ip" name="dst-ip" placeholder="a.b.c.d">
-      </div>
-      <div class="form-group">
-        <label for="src-port">Source Port:</label>
-        <input type="text" class="form-control" name="src-port" placeholder="1000">
-      </div>
-      <div class="form-group">
-        <label for="dst-port">Destination Port:</label>
-        <input type="text" class="form-control" name="dst-port" placeholder="1000">
-      </div>
-      <div class="form-group">
-        <label for="no-of-packets">Packet Count:</label>
-        <input type="text" class="form-control" name="no-of-packets" placeholder="1000">
-      </div>
-      <div class="form-group">
-        <label for="payload">Payload:</label>
-        <input type="text" class="form-control" name="payload" placeholder="payload...">
-      </div>
-        </div>
-        <div class="modal-footer">
-          <input type="submit" value="Add" name="add" class="btn btn-success">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-  </form>
-
+	  <!--avmform action="generate_packets" method="post"-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Packet Details</h4>
+	        </div>
+	        <div class="modal-body">
+	      <div class="form-group">
+	        <label for="src-ip">Source IP Address:</label>
+	        <input type="text" class="form-control" data-fv-field="ip" name="src-ip" placeholder="a.b.c.d">
+	      </div>
+	      <div class="form-group">
+	        <label for="dst-ip">Destination IP Address:</label>
+	        <input type="text" class="form-control" data-fv-field="ip" name="dst-ip" placeholder="a.b.c.d">
+	      </div>
+	      <div class="form-group">
+	        <label for="src-port">Source Port:</label>
+	        <input type="text" class="form-control" name="src-port" placeholder="1000">
+	      </div>
+	      <div class="form-group">
+	        <label for="dst-port">Destination Port:</label>
+	        <input type="text" class="form-control" name="dst-port" placeholder="1000">
+	      </div>
+	      <div class="form-group">
+	        <label for="no-of-packets">Packet Count:</label>
+	        <input type="text" class="form-control" name="no-of-packets" placeholder="1000">
+	      </div>
+	      <div class="form-group">
+	        <label for="payload">Payload:</label>
+	        <input type="text" class="form-control" name="payload" placeholder="payload...">
+	      </div>
+	        </div>
+	        <div class="modal-footer">
+	          <input type="submit" value="Add" name="add" class="btn btn-success">
+	          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	  </form>
     </div>
   </div>
 
