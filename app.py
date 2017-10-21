@@ -4,13 +4,17 @@ from lib.udp import Udp
 from lib.igmp import Igmp
 from lib.icmp import Icmp
 import sys
+from flask import Flask, render_template, request, redirect, flash
 
-from flask import Flask, render_template, request
+
 app = Flask(__name__)
 app.debug = True
+app.secret_key = 'random string'
 #    app.run()
 
 @app.route("/")
+@app.route("/index.html")
+@app.route("/home.html")
 def main():
     return render_template('index.html')
 
@@ -23,20 +27,23 @@ def api_proto():
     proto_number = int(request.form['proto-number'])
     no_of_packets = int(request.form['no-of-packets'])
     payload = request.form['payload']
-    print('hi')
 
-    #gen = Tcp("127.0.0.1","127.0.0.1",1000,1000,1,"helloooo!!!")
     if proto_number is 1:
-    	gen = Icmp(src_ip,dst_ip,1,str(payload))
+        gen = Icmp(src_ip,dst_ip,1,str(payload))
     elif proto_number is 2:
-    	gen = Igmp(src_ip,dst_ip,2,str(payload))
+        gen = Igmp(src_ip,dst_ip,2,str(payload))
     elif proto_number is 17:
-    	gen = Udp(src_ip,dst_ip,src_port,dst_port,17,str(payload))
+        gen = Udp(src_ip,dst_ip,src_port,dst_port,17,str(payload))
     elif proto_number is 6:
-    	gen = Tcp(src_ip,dst_ip,src_port,dst_port,6,str(payload))
-    #gen.generate(int(sys.argv[1]))
-    gen.generate(no_of_packets)
-    return render_template('index.html')
+        gen = Tcp(src_ip,dst_ip,src_port,dst_port,6,str(payload))
 
-#if __name__ == "__main__":
-app.run()
+    if gen != None and gen.generate(no_of_packets):
+        flash('success')
+        flash('Successfully generated ' + str(no_of_packets) + ' packets.')
+    else:
+        flash('error')
+        flash('Failed to create packet.')
+    return redirect('/index.html', code=302)
+
+if __name__ == "__main__":
+    app.run()
