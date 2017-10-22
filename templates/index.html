@@ -35,8 +35,22 @@
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation" class="active"><a href="#">Home</a>
                     </li>
-                    <li role="presentation" data-toggle="modal" data-target="#signInModal"><a href="#">Sign In</a>
-                    </li>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% if messages[0] == "loggedin" %}
+                                    <li role="presentation" data-toggle="modal"><a href="index.html">Logout</a>
+                                    </li>
+                                {% else %}
+                                    <li role="presentation" data-toggle="modal" data-target="#signInModal"><a href="#">Sign In</a>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li role="presentation" data-toggle="modal" data-target="#signInModal"><a href="#">Sign In</a>
+                                </li>
+                            {% endif %}
+                        {% endwith %}
+
+
                     <li role="presentation"><a href="#">Sign Up</a>
                     </li>
                 </ul>
@@ -118,20 +132,25 @@
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-                    {% if messages[0] == "success" %}
-                        <div class="alert alert-success fade in message_box">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>SUCCESS: </strong>{{ messages[1] }}
+            
+            {% if messages[0] == "loggedin" and messages.pop(0) %}
+            {% endif %}
 
-                    {% else %}
-                        <div class="alert alert-danger fade in message_box">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>ERROR: </strong>{{ messages[1] }} 
-                    {% endif %}
+            {% if messages[0] == "success" %}
+                <div class="alert alert-success fade in message_box">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>SUCCESS: </strong>{{ messages[1] }}
+
+            {% else %}
+                <div class="alert alert-danger fade in message_box">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>ERROR: </strong>{{ messages[1] }} 
+            {% endif %}
         </div>
         {% endif %}
     {% endwith %}
 
+    <form action="login" method="post">
       <div class="modal fade" id="signInModal" role="dialog">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -149,13 +168,13 @@
               </div>
             </div>
             <div class="modal-footer">
-              <input type="submit" onClick="alert('implementation in progress.');" value="Sign In" name="signin" class="btn btn-success">
+              <input type="submit" value="Sign In" name="signin" class="btn btn-success">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
-
+    </form>
 
     <script>
         $(document).ready(function() {

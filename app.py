@@ -45,5 +45,21 @@ def api_proto():
         flash('Failed to create packet.')
     return redirect('/index.html', code=302)
 
+@app.route("/login", methods = ['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+
+    if username == '' and password == '':
+        flash('error')
+        flash('Failed to login')
+
+    elif username == 'admin' and password == 'admin':
+        flash('loggedin')
+        flash('success')
+        flash('Successfully logged in.')
+
+    return redirect('/index.html', code=302)
+
 if __name__ == "__main__":
     app.run()
